@@ -7,7 +7,7 @@ class LookupWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Lookup Item")
-        self.setGeometry(0, 0, 1280, 720)
+        self.setGeometry(0, 0, 1920, 1080)
         self.setWindowIcon(QIcon("C:\\Users\\mahar\\Desktop\\price-tracker\\images\\Screenshot 2024-06-12 212403.png"))  
 
         self.window_title_label = QLabel("Lookup an item", self) 

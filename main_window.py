@@ -7,7 +7,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Item Database")
-        self.setGeometry(0, 0, 1280, 720)
+        self.setGeometry(0, 0, 1920, 1080)
         self.setWindowIcon(QIcon("C:\\Users\\mahar\\Desktop\\price-tracker\\images\\Screenshot 2024-06-12 212403.png"))
 
         self.title_label = QLabel("Store Item Database", self)
