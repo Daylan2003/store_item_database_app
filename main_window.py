@@ -1,7 +1,6 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QSizePolicy
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
-
 
 class MainWindow(QMainWindow):
 
@@ -19,66 +18,61 @@ class MainWindow(QMainWindow):
         self.add_window = None
         self.lookup_window = None
 
-        window_width = self.width()
-        window_height = self.height()
-
     def initUI(self):
-
-
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
 
-        button_layout = QHBoxLayout()
+      
         main_layout = QVBoxLayout()
+        button_layout = QHBoxLayout()
 
-      
+       
+        self.title_label.setStyleSheet("font-size: 75px;"
+                                       "background-color: #1256b0;"
+                                       "border-style: solid;"
+                                       "border-color: black;"
+                                       "border-width: 5px;"
+                                       "font-weight: bold;"
+                                       "font-family: Comic Sans MS;"
+                                       "color: white")
+        self.title_label.setAlignment(Qt.AlignCenter)
+        self.title_label.setFixedHeight(140)  
 
-      
+     
         self.add_item_button.setStyleSheet("font-size: 30px;"
                                            "background-color: #10ceeb;"
                                            "border-style: solid;"
                                            "border-color: black;"
-                                           "border-width: 5px;")  
+                                           "border-width: 5px;")
+        self.add_item_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.add_item_button.clicked.connect(self.add_item_clicked) 
-        self.add_item_button.setMinimumSize(300, 300)
 
-
-    
         self.lookup_item_button.setStyleSheet("font-size: 30px;"
                                               "background-color: #10ceeb;"
                                               "border-style: solid;"
                                               "border-color: black;"
                                               "border-width: 5px;")
+        self.lookup_item_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         self.lookup_item_button.clicked.connect(self.lookup_item_clicked)
-        self.lookup_item_button.setMinimumSize(300, 300)
-        
 
+
+        self.setStyleSheet("background-color: #b1c5de;")
        
-        self.title_label.setMinimumHeight(150)
-        self.title_label.setStyleSheet("font-size: 24px;"
-                                       "background-color: green;"
-                                       "border-style: solid;"
-                                       "border-color: black;"
-                                       "border-width: 5px;")
+
         
-       
-        
-        
-
-        self.setStyleSheet("background-color: #e9f0ea;")
-
-        self.title_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
-
-        self.title_label.setAlignment(Qt.AlignCenter)  
-
-        # Set the main layout
         button_layout.addWidget(self.add_item_button)
         button_layout.addWidget(self.lookup_item_button)
-        main_layout.addWidget(self.title_label, 0)  
-        main_layout.addLayout(button_layout, 1) 
-    
+        button_layout.setContentsMargins(20, 40, 20, 40)
 
+       
+        main_layout.addWidget(self.title_label)
+        main_layout.addLayout(button_layout)
+        main_layout.setContentsMargins(0, 0, 0, 10)
+
+       
         central_widget.setLayout(main_layout)
+
+        
     
 
 
