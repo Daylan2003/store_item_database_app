@@ -2,6 +2,8 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWid
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 from main_window import MainWindow
+import sqlite3
+from add_to_database import create_database
 
 class AddWindow(QWidget):
 
@@ -39,6 +41,7 @@ class AddWindow(QWidget):
 
 
         self.initUI() 
+        create_database()
 
         self.main_window = None
 
@@ -232,10 +235,20 @@ class AddWindow(QWidget):
         item_quantity_input = self.item_quantity_line_edit.text()
         if item_quantity_input.strip() == "":
             item_quantity = -1
+        else:
+            try:
+                item_quantity = int(item_quantity_input)
+            except ValueError:
+                self.completion_status_label.setText("Completion Status: Error, Quantity entered incorrectly.")
+                self.set_error_style()
+                return
+
+          
 
         try:
             item_price = round(float(self.item_price_line_edit.text()),2)
             barcode_number = int(self.item_barcode_number_line_edit.text())
+            item_quantity = int(self.item_quantity_line_edit.text())
         except ValueError:
             self.completion_status_label.setText("Completion Status: Error, Item entered incorrectly.")
             self.completion_status_label.setStyleSheet("font-size: 75px;"
@@ -249,6 +262,8 @@ class AddWindow(QWidget):
             return    
 
         inputs_correct = self.check_input(item_name, item_price, item_quantity, barcode_number)
+
+        
 
         if inputs_correct:
             print(item_name)
@@ -264,6 +279,19 @@ class AddWindow(QWidget):
                                                        "font-weight: bold;"
                                                        "font-family: Comic Sans MS;"
                                                        "color: white") 
+            
+            try:
+                connect = sqlite3.connect('products.db')
+                cursor = connect.cursor() 
+                cursor.execute("INSERT INTO products VALUES (?, ?, ?, ?)", (item_name, item_price, item_quantity, barcode_number))
+ 
+                connect.commit()
+            except sqlite3.Error as e:
+                self.completion_status_label.setText(f"Database Error: {e}")
+            finally:
+                connect.close()    
+                       
+
         else:
             self.completion_status_label.setText("Completion Status: Error, Item entered incorrectly.") 
             self.completion_status_label.setStyleSheet("font-size: 75px;"
@@ -275,6 +303,8 @@ class AddWindow(QWidget):
                                                        "font-family: Comic Sans MS;"
                                                        "color: white")  
 
+          
+        
 
     def check_input(self, name, price, quantity, number):
         correct_inputs = True
