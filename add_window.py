@@ -229,9 +229,12 @@ class AddWindow(QWidget):
         print("A new item has been entered into the database")    
         item_name = self.item_name_line_edit.text()
 
+        item_quantity_input = self.item_quantity_line_edit.text()
+        if item_quantity_input.strip() == "":
+            item_quantity = -1
+
         try:
             item_price = round(float(self.item_price_line_edit.text()),2)
-            item_quantity = int(self.item_quantity_line_edit.text())
             barcode_number = int(self.item_barcode_number_line_edit.text())
         except ValueError:
             self.completion_status_label.setText("Completion Status: Error, Item entered incorrectly.")
