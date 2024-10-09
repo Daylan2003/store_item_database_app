@@ -1,5 +1,4 @@
 import sqlite3
-from add_window import AddWindow
 
 
 def create_database():
@@ -10,7 +9,6 @@ def create_database():
 
     cursor.execute ("""
         CREATE TABLE IF NOT EXISTS products (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
             item_name TEXT NOT NULL,
             item_price REAL,
             item_quantity INTEGER,
