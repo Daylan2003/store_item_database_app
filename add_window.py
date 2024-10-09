@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, QLineEdit
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, QLineEdit, QSpacerItem
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 from main_window import MainWindow
@@ -9,7 +9,13 @@ class AddWindow(QWidget):
         super().__init__()
         self.setWindowTitle("Add Item")
         self.setGeometry(0, 0, 1920, 1080)
-        self.setWindowIcon(QIcon("C:\\Users\\mahar\\Desktop\\price-tracker\\images\\Screenshot 2024-06-12 212403.png"))    
+        self.setWindowIcon(QIcon("C:\\Users\\mahar\\Desktop\\price-tracker\\images\\Screenshot 2024-06-12 212403.png")) 
+
+        self.spacer1 = QSpacerItem(20, 40, QSizePolicy.Expanding, QSizePolicy.Expanding)   
+        self.spacer2 = QSpacerItem(20, 40, QSizePolicy.Expanding, QSizePolicy.Expanding)  
+        self.spacer3 = QSpacerItem(20, 40, QSizePolicy.Expanding, QSizePolicy.Expanding)  
+        self.spacer4 = QSpacerItem(20, 40, QSizePolicy.Expanding, QSizePolicy.Expanding)  
+        self.spacer5 = QSpacerItem(20, 40, QSizePolicy.Expanding, QSizePolicy.Expanding)  
 
         self.add_title_label = QLabel("Add an item to the database", self)   
         self.back_button = QPushButton("Back", self) 
@@ -46,16 +52,7 @@ class AddWindow(QWidget):
 
         main_layout = QVBoxLayout()
         
-        self.add_title_label.setStyleSheet("font-size: 75px;"
-                                           "background-color: #1256b0;"
-                                           "border-style: solid;"
-                                           "border-color: black;"
-                                           "border-width: 5px;"
-                                           "font-weight: bold;"
-                                           "font-family: Comic Sans MS;"
-                                           "color: white")
-        self.add_title_label.setAlignment(Qt.AlignCenter)
-        self.add_title_label.setFixedHeight(140) 
+         
 
         
         self.back_button.clicked.connect(self.go_back)
@@ -67,67 +64,89 @@ class AddWindow(QWidget):
                                            "font-weight: bold;"
                                            "font-family: Comic Sans MS;"
                                            "color: white")
+        #self.back_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.back_button.setFixedHeight(140)  
         self.back_button.setFixedWidth(250) 
 
 
+        self.add_title_label.setStyleSheet("font-size: 75px;"
+                                           "background-color: #1256b0;"
+                                           "border-style: solid;"
+                                           "border-color: black;"
+                                           "border-width: 5px;"
+                                           "font-weight: bold;"
+                                           "font-family: Comic Sans MS;"
+                                           "color: white")
+        self.add_title_label.setAlignment(Qt.AlignCenter)
+        #self.add_title_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.add_title_label.setFixedHeight(140)
+
+
 #----------------------------------------------------------------------------------------------------------------------------------------
-        self.item_name_label.setStyleSheet("font-size: 50px;"
-                                           "font-family: Arial;")
-        self.item_name_label.setFixedWidth(400)
+        self.item_name_label.setStyleSheet("font-size: 55px;"
+                                           "font-family: Comic Sans MS;")
+        self.item_name_label.setFixedWidth(460)
         self.item_name_label.setAlignment(Qt.AlignLeft)
         self.item_name_label.setAlignment(Qt.AlignVCenter)
 
 
         self.item_name_line_edit.setStyleSheet("font-size: 50px;"
-                                               "font-family: Arial;")
-        self.item_name_line_edit.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        self.item_name_line_edit.setMaximumHeight(70)
+                                               "font-family: Arial;"
+                                               "background-color: white")
+        self.item_name_line_edit.setPlaceholderText("Enter Item Name")
+        self.item_name_line_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        #self.item_name_line_edit.setMaximumHeight(70)
 
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------
-        self.barcode_number_label.setStyleSheet("font-size: 50px;"
-                                           "font-family: Arial;")
-        self.barcode_number_label.setFixedWidth(400)
+        self.barcode_number_label.setStyleSheet("font-size: 55px;"
+                                           "font-family: Comic Sans MS;")
+        self.barcode_number_label.setFixedWidth(460)
         self.barcode_number_label.setAlignment(Qt.AlignLeft)
         self.barcode_number_label.setAlignment(Qt.AlignVCenter)
         
 
 
         self.item_barcode_number_line_edit.setStyleSheet("font-size: 50px;"
-                                               "font-family: Arial;")
-        self.item_barcode_number_line_edit.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        self.item_barcode_number_line_edit.setMaximumHeight(70)        
+                                                         "font-family: Arial;"
+                                                         "background-color: white")
+        self.item_barcode_number_line_edit.setPlaceholderText("Enter Barcode Number")
+        self.item_barcode_number_line_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        #self.item_barcode_number_line_edit.setMaximumHeight(70)        
 
 
        
 #--------------------------------------------------------------------------------------------------------------------------------------- 
-        self.item_price_label.setStyleSheet("font-size: 50px;"
-                                           "font-family: Arial;")
-        self.item_price_label.setFixedWidth(400)
+        self.item_price_label.setStyleSheet("font-size: 55px;"
+                                           "font-family: Comic Sans MS;")
+        self.item_price_label.setFixedWidth(460)
         self.item_price_label.setAlignment(Qt.AlignLeft)
         self.item_price_label.setAlignment(Qt.AlignVCenter)
 
         self.item_price_line_edit.setStyleSheet("font-size: 50px;"
-                                               "font-family: Arial;")
-        self.item_price_line_edit.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        self.item_price_line_edit.setMaximumHeight(70)
+                                               "font-family: Arial;"
+                                               "background-color: white")
+        self.item_price_line_edit.setPlaceholderText("Enter Item Price")
+        self.item_price_line_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        #self.item_price_line_edit.setMaximumHeight(70)
 
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------
-        self.item_quantity_label.setStyleSheet("font-size: 50px;"
-                                           "font-family: Arial;")
-        self.item_quantity_label.setFixedWidth(400)
+        self.item_quantity_label.setStyleSheet("font-size: 55px;"
+                                           "font-family: Comic Sans MS;")
+        self.item_quantity_label.setFixedWidth(460)
         self.item_quantity_label.setAlignment(Qt.AlignLeft)
         self.item_quantity_label.setAlignment(Qt.AlignVCenter)
         
 
         self.item_quantity_line_edit.setStyleSheet("font-size: 50px;"
-                                               "font-family: Arial;")
-        self.item_quantity_line_edit.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Minimum)
-        self.item_quantity_line_edit.setMaximumHeight(70)
+                                                  "font-family: Arial;"
+                                                  "background-color: white")
+        self.item_quantity_line_edit.setPlaceholderText("Enter Item Quantity")
+        self.item_quantity_line_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        #self.item_quantity_line_edit.setMaximumHeight(70)
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -144,17 +163,20 @@ class AddWindow(QWidget):
 
         self.completion_status_label.setStyleSheet("font-size: 75px;"
                                                    "background-color: #1256b0;"
-                                                   "border-style: solid;"
-                                                   "border-color: black;"
-                                                   "border-width: 5px;"
+                                                   "border-bottom: 5px solid black;"
                                                    "font-weight: bold;"
                                                    "font-family: Comic Sans MS;"
                                                    "color: white") 
         self.completion_status_label.setMaximumHeight(140)
+        
 
+        
 #----------------------------------------------------------------------------------------------------------------------------------------
-        title_layout.addWidget(self.back_button, 0)
-        title_layout.addWidget(self.add_title_label, 1)
+        title_layout.addWidget(self.back_button)
+        title_layout.addWidget(self.add_title_label)
+
+        title_layout.setSpacing(0)  # Space between back button and title label
+        title_layout.setContentsMargins(0, 0, 0, 0)
 
         item_name_layout.addWidget(self.item_name_label)
         item_name_layout.addWidget(self.item_name_line_edit)
@@ -173,13 +195,24 @@ class AddWindow(QWidget):
         item_barcode_layout.setContentsMargins(10, 10, 50, 10)
 
 
+
+     
+
+
         main_layout.addLayout(title_layout)
+        main_layout.addItem(self.spacer1)
         main_layout.addLayout(item_name_layout)
+        main_layout.addItem(self.spacer2)
         main_layout.addLayout(item_price_layout)
+        main_layout.addItem(self.spacer3)
         main_layout.addLayout(item_quantity_layout)
+        main_layout.addItem(self.spacer4)
         main_layout.addLayout(item_barcode_layout)
+        main_layout.addItem(self.spacer5)
         main_layout.addWidget(self.add_button)
         main_layout.addWidget(self.completion_status_label)
+
+        main_layout.setContentsMargins(0, 0, 0, 10)
 
         self.setLayout(main_layout)
 
@@ -195,9 +228,60 @@ class AddWindow(QWidget):
     def add_item(self):
         print("A new item has been entered into the database")    
         item_name = self.item_name_line_edit.text()
-        item_price = self.item_price_line_edit.text()
-        item_quantity = self.item_quantity_line_edit.text()
-        print(item_name)
-        print(item_price)
-        print(item_quantity)
-        self.completion_status_label.setText("Completion Status: Item Added Successfully") 
+
+        try:
+            item_price = round(float(self.item_price_line_edit.text()),2)
+            item_quantity = int(self.item_quantity_line_edit.text())
+            barcode_number = int(self.item_barcode_number_line_edit.text())
+        except ValueError:
+            self.completion_status_label.setText("Completion Status: Error, Item entered incorrectly.")
+            self.completion_status_label.setStyleSheet("font-size: 75px;"
+                                                       "background-color: #f51d1d;"
+                                                       "border-style: solid;"
+                                                       "border-color: black;"
+                                                       "border-width: 5px;"
+                                                       "font-weight: bold;"
+                                                       "font-family: Comic Sans MS;"
+                                                       "color: white")  
+            return    
+
+        inputs_correct = self.check_input(item_name, item_price, item_quantity, barcode_number)
+
+        if inputs_correct:
+            print(item_name)
+            print(item_price)
+            print(item_quantity)
+            print(barcode_number)
+            self.completion_status_label.setText("Completion Status: Item Added Successfully")    
+            self.completion_status_label.setStyleSheet("font-size: 75px;"
+                                                       "background-color: #079c05;"
+                                                       "border-style: solid;"
+                                                       "border-color: black;"
+                                                       "border-width: 5px;"
+                                                       "font-weight: bold;"
+                                                       "font-family: Comic Sans MS;"
+                                                       "color: white") 
+        else:
+            self.completion_status_label.setText("Completion Status: Error, Item entered incorrectly.") 
+            self.completion_status_label.setStyleSheet("font-size: 75px;"
+                                                       "background-color: #f51d1d;"
+                                                       "border-style: solid;"
+                                                       "border-color: black;"
+                                                       "border-width: 5px;"
+                                                       "font-weight: bold;"
+                                                       "font-family: Comic Sans MS;"
+                                                       "color: white")  
+
+
+    def check_input(self, name, price, quantity, number):
+        correct_inputs = True
+        if not isinstance(name, str):
+            correct_inputs = False    
+        if not isinstance(price, float):
+            correct_inputs = False     
+        if not isinstance(quantity, int):
+            correct_inputs = False   
+        if not isinstance(number, int):
+            correct_inputs = False    
+
+        return correct_inputs           
