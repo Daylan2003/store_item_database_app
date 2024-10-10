@@ -240,7 +240,7 @@ class AddWindow(QWidget):
                 item_quantity = int(item_quantity_input)
             except ValueError:
                 self.completion_status_label.setText("Completion Status: Error, Quantity entered incorrectly.")
-                self.set_error_style()
+                #self.set_error_style()
                 return
 
           

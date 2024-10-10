@@ -12,7 +12,7 @@ class MainWindow(QMainWindow):
 
         self.title_label = QLabel("Store Item Database", self)
         self.add_item_button = QPushButton("Add Item", self)
-        self.lookup_item_button = QPushButton("Lookup Item", self)
+        self.lookup_item_button = QPushButton("Lookup/Edit Item", self)
         self.initUI()
 
         self.add_window = None
