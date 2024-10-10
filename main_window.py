@@ -25,6 +25,7 @@ class MainWindow(QMainWindow):
       
         main_layout = QVBoxLayout()
         button_layout = QHBoxLayout()
+        
 
        
         self.title_label.setStyleSheet("font-size: 75px;"

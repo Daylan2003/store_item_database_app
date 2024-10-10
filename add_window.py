@@ -59,15 +59,28 @@ class AddWindow(QWidget):
 
         
         self.back_button.clicked.connect(self.go_back)
-        self.back_button.setStyleSheet("font-size: 75px;"
-                                           "background-color: #7d838a;"
-                                           "border-style: solid;"
-                                           "border-color: black;"
-                                           "border-width: 5px;"
-                                           "font-weight: bold;"
-                                           "font-family: Comic Sans MS;"
-                                           "color: white")
-        #self.back_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.back_button.setStyleSheet(
+                                        """
+                                        QPushButton {
+                                        font-size: 75px;
+                                        background-color: #7d838a;
+                                        border-bottom: 5px solid #32353d;
+                                        border-top: 5px solid #32353d;
+                                        border-left: 5px solid #32353d;
+                                        font-weight: bold;
+                                        font-family: Comic Sans MS;
+                                        color: white;
+                                        }
+                                        QPushButton:hover {
+                                        background-color: #c5d7eb;
+                                        border-bottom: 5px solid white;
+                                        border-top: 5px solid white;
+                                        border-left: 5px solid white; 
+                                        color: #7d838a  
+                                        }
+                                        """
+                                        )
+        self.back_button.setCursor(Qt.PointingHandCursor) 
         self.back_button.setFixedHeight(140)  
         self.back_button.setFixedWidth(250) 
 
@@ -75,13 +88,12 @@ class AddWindow(QWidget):
         self.add_title_label.setStyleSheet("font-size: 75px;"
                                            "background-color: #1256b0;"
                                            "border-style: solid;"
-                                           "border-color: black;"
+                                           "border-color: #32353d;"
                                            "border-width: 5px;"
                                            "font-weight: bold;"
                                            "font-family: Comic Sans MS;"
                                            "color: white")
         self.add_title_label.setAlignment(Qt.AlignCenter)
-        #self.add_title_label.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.add_title_label.setFixedHeight(140)
 
 
@@ -95,10 +107,14 @@ class AddWindow(QWidget):
 
         self.item_name_line_edit.setStyleSheet("font-size: 50px;"
                                                "font-family: Arial;"
-                                               "background-color: white")
+                                               "background-color: white;"
+                                               "border-style: solid;"
+                                               "border-width: 2px;"
+                                               "border-color: #0d4178;")
+        
         self.item_name_line_edit.setPlaceholderText("Enter Item Name")
         self.item_name_line_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        #self.item_name_line_edit.setMaximumHeight(70)
+       
 
 
 
@@ -113,10 +129,13 @@ class AddWindow(QWidget):
 
         self.item_barcode_number_line_edit.setStyleSheet("font-size: 50px;"
                                                          "font-family: Arial;"
-                                                         "background-color: white")
+                                                         "background-color: white;"
+                                                         "border-style: solid;"
+                                                         "border-width: 2px;"
+                                                         "border-color: #0d4178;")
         self.item_barcode_number_line_edit.setPlaceholderText("Enter Barcode Number")
         self.item_barcode_number_line_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        #self.item_barcode_number_line_edit.setMaximumHeight(70)        
+          
 
 
        
@@ -129,10 +148,13 @@ class AddWindow(QWidget):
 
         self.item_price_line_edit.setStyleSheet("font-size: 50px;"
                                                "font-family: Arial;"
-                                               "background-color: white")
+                                               "background-color: white;"
+                                               "border-style: solid;"
+                                               "border-width: 2px;"
+                                               "border-color: #0d4178;")
         self.item_price_line_edit.setPlaceholderText("Enter Item Price")
         self.item_price_line_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        #self.item_price_line_edit.setMaximumHeight(70)
+       
 
 
 
@@ -146,31 +168,44 @@ class AddWindow(QWidget):
 
         self.item_quantity_line_edit.setStyleSheet("font-size: 50px;"
                                                   "font-family: Arial;"
-                                                  "background-color: white")
+                                                  "background-color: white;"
+                                                  "border-style: solid;"
+                                                  "border-width: 2px;"
+                                                  "border-color: #0d4178;")
         self.item_quantity_line_edit.setPlaceholderText("Enter Item Quantity")
         self.item_quantity_line_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        #self.item_quantity_line_edit.setMaximumHeight(70)
+       
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------
         self.add_button.clicked.connect(self.add_item)
-        self.add_button.setStyleSheet("font-size: 75px;"
-                                      "background-color: #1256b0;"
-                                      "border-style: solid;"
-                                      "border-color: black;"
-                                      "border-width: 5px;"
-                                      "font-weight: bold;"
-                                      "font-family: Comic Sans MS;"
-                                      "color: white")
+        self.add_button.setStyleSheet("""
+                                      QPushButton{
+                                      font-size: 75px;
+                                      background-color: #1256b0;
+                                      border-style: solid;
+                                      border-color: black;
+                                      border-width: 5px;
+                                      font-weight: bold;
+                                      font-family: Comic Sans MS;
+                                      color: white;
+                                      }
+                                      QPushButton:hover {
+                                      color: #1256b0;
+                                      background-color: #e1ebf5;
+                                      border-color: white;
+                                      }
+                                    """)
+        self.back_button.setCursor(Qt.PointingHandCursor) 
         self.add_button.setFixedHeight(140) 
 
         self.completion_status_label.setStyleSheet("font-size: 75px;"
                                                    "background-color: #1256b0;"
-                                                   "border-bottom: 5px solid black;"
+                                                   "border: 5px solid black;"
                                                    "font-weight: bold;"
                                                    "font-family: Comic Sans MS;"
                                                    "color: white") 
-        self.completion_status_label.setMaximumHeight(140)
+        self.completion_status_label.setFixedHeight(140)
         
 
         
@@ -228,8 +263,7 @@ class AddWindow(QWidget):
         self.main_window.show()
         self.close()    
 
-    def add_item(self):
-        print("A new item has been entered into the database")    
+    def add_item(self):   
         item_name = self.item_name_line_edit.text()
 
         item_quantity_input = self.item_quantity_line_edit.text()
@@ -239,8 +273,7 @@ class AddWindow(QWidget):
             try:
                 item_quantity = int(item_quantity_input)
             except ValueError:
-                self.completion_status_label.setText("Completion Status: Error, Quantity entered incorrectly.")
-                #self.set_error_style()
+                self.completition_error()
                 return
 
           
@@ -248,17 +281,8 @@ class AddWindow(QWidget):
         try:
             item_price = round(float(self.item_price_line_edit.text()),2)
             barcode_number = int(self.item_barcode_number_line_edit.text())
-            item_quantity = int(self.item_quantity_line_edit.text())
         except ValueError:
-            self.completion_status_label.setText("Completion Status: Error, Item entered incorrectly.")
-            self.completion_status_label.setStyleSheet("font-size: 75px;"
-                                                       "background-color: #f51d1d;"
-                                                       "border-style: solid;"
-                                                       "border-color: black;"
-                                                       "border-width: 5px;"
-                                                       "font-weight: bold;"
-                                                       "font-family: Comic Sans MS;"
-                                                       "color: white")  
+            self.completition_error()
             return    
 
         inputs_correct = self.check_input(item_name, item_price, item_quantity, barcode_number)
@@ -293,15 +317,7 @@ class AddWindow(QWidget):
                        
 
         else:
-            self.completion_status_label.setText("Completion Status: Error, Item entered incorrectly.") 
-            self.completion_status_label.setStyleSheet("font-size: 75px;"
-                                                       "background-color: #f51d1d;"
-                                                       "border-style: solid;"
-                                                       "border-color: black;"
-                                                       "border-width: 5px;"
-                                                       "font-weight: bold;"
-                                                       "font-family: Comic Sans MS;"
-                                                       "color: white")  
+            self.completition_error() 
 
           
         
@@ -310,11 +326,23 @@ class AddWindow(QWidget):
         correct_inputs = True
         if not isinstance(name, str):
             correct_inputs = False    
-        if not isinstance(price, float):
+        if not isinstance(price, float) or price < 0:
             correct_inputs = False     
-        if not isinstance(quantity, int):
+        if not isinstance(quantity, int) or quantity < -1:
             correct_inputs = False   
         if not isinstance(number, int):
             correct_inputs = False    
 
-        return correct_inputs           
+        return correct_inputs   
+
+
+    def completition_error(self):
+        self.completion_status_label.setText("Completion Status: Error, Item entered incorrectly.") 
+        self.completion_status_label.setStyleSheet("font-size: 75px;"
+                                                    "background-color: #f51d1d;"
+                                                    "border-style: solid;"
+                                                    "border-color: black;"
+                                                    "border-width: 5px;"
+                                                    "font-weight: bold;"
+                                                    "font-family: Comic Sans MS;"
+                                                    "color: white")          

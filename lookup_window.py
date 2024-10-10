@@ -18,6 +18,8 @@ class LookupWindow(QWidget):
         self.search_bar = QLineEdit(self)
         self.search_button = QPushButton("Search", self)
         self.table = QTableView()
+        self.save_changes_button = QPushButton("Save Changes", self)
+        self.change_status_label = QLabel("Completition Status: ")
 
         self.main_window = None
 
@@ -35,18 +37,34 @@ class LookupWindow(QWidget):
         title_layout = QHBoxLayout()
         search_layout = QHBoxLayout()
 
+        database_layout = QHBoxLayout()
+        changes_layout = QHBoxLayout()
+
         main_layout = QVBoxLayout()
         
 
         self.back_button.clicked.connect(self.go_back)
-        self.back_button.setStyleSheet("font-size: 75px;"
-                                           "background-color: #7d838a;"
-                                           "border-style: solid;"
-                                           "border-color: black;"
-                                           "border-width: 5px;"
-                                           "font-weight: bold;"
-                                           "font-family: Comic Sans MS;"
-                                           "color: white")
+        self.back_button.setStyleSheet(
+                                        """
+                                        QPushButton {
+                                        font-size: 75px;
+                                        background-color: #7d838a;
+                                        border-bottom: 5px solid #32353d;
+                                        border-top: 5px solid #32353d;
+                                        border-left: 5px solid #32353d;
+                                        font-weight: bold;
+                                        font-family: Comic Sans MS;
+                                        color: white;
+                                        }
+                                        QPushButton:hover {
+                                        background-color: #c5d7eb;
+                                        border-bottom: 5px solid white;
+                                        border-top: 5px solid white;
+                                        border-left: 5px solid white; 
+                                        color: #7d838a  
+                                        }
+                                        """
+                                        )
         self.back_button.setFixedHeight(140)  
         self.back_button.setFixedWidth(250) 
 
@@ -62,23 +80,83 @@ class LookupWindow(QWidget):
         self.window_title_label.setAlignment(Qt.AlignCenter)
         self.window_title_label.setFixedHeight(140)
 
+        self.change_status_label.setStyleSheet("font-size: 75px;"
+                                           "background-color: #1256b0;"
+                                           "border-style: solid;"
+                                           "border-color: black;"
+                                           "border-width: 5px;"
+                                           "font-weight: bold;"
+                                           "font-family: Comic Sans MS;"
+                                           "color: white")
+        self.back_button.setFixedHeight(140)
+
+
+
+        self.search_bar.setStyleSheet("font-size: 55px;"
+                                      "font-family: Comic Sans MS;"
+                                      "background-color: white;")
+        self.search_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.search_bar.setFixedHeight(70)
+        
+
+        self.search_button.setStyleSheet("font-size: 50px;"
+                                         "font-family: Arial;"
+                                         "background-color: white")
+        self.search_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.search_button.setFixedWidth(200)
+        self.search_button.setFixedHeight(70) 
+
 
         self.table.setModel(self.model)
         self.table.setSelectionMode(QTableView.SingleSelection)
         self.table.setEditTriggers(QTableView.AllEditTriggers)
+        self.table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
+
+
+
+
+        self.save_changes_button.setStyleSheet("font-size: 50px;"
+                                           "background-color: #1256b0;"
+                                           "border-style: solid;"
+                                           "border-color: black;"
+                                           "border-width: 5px;"
+                                           "font-weight: bold;"
+                                           "font-family: Comic Sans MS;"
+                                           "color: white")
+        self.save_changes_button.setFixedHeight(140)  
+        self.save_changes_button.setFixedWidth(350) 
+        self.save_changes_button.clicked.connect(self.save_changes)
 
 
         title_layout.addWidget(self.back_button)
         title_layout.addWidget(self.window_title_label)
 
+        title_layout.setSpacing(0)  
+        title_layout.setContentsMargins(0, 0, 0, 0)
+
         search_layout.addWidget(self.search_bar)
         search_layout.addWidget(self.search_button)
+        search_layout.setContentsMargins(20, 15, 20, 15)
+
+        #database_layout.addWidget(self.table)
+        #database_layout.setAlignment(Qt.AlignCenter)
+
+        changes_layout.addWidget(self.save_changes_button)
+        changes_layout.addWidget(self.change_status_label)
 
         main_layout.addLayout(title_layout)
         main_layout.addLayout(search_layout)
-        main_layout.addWidget(self.table)
+        main_layout.addLayout(database_layout)
+        main_layout.addLayout(changes_layout)
+
+        main_layout.setContentsMargins(0, 0, 0, 10)
+        
 
         self.setLayout(main_layout)
+
+
+        self.setStyleSheet("background-color: #b1c5de;")
 
     def go_back(self):
 
@@ -94,3 +172,6 @@ class LookupWindow(QWidget):
         if not database.open():
             print("The database was unable to be opened")
         return database     
+    
+    def save_changes():
+        pass
