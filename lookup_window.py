@@ -86,15 +86,37 @@ class LookupWindow(QWidget):
 
 #----------------------------------------------------------------------------------------------------------------------------------------        
         self.search_bar.setStyleSheet("font-size: 55px;"
-                                      "font-family: Comic Sans MS;"
-                                      "background-color: white;")
+                                      "font-family: Arial;"
+                                      "background-color: white;"
+                                      "border-style: solid;"
+                                      "border-width: 2px;"
+                                      "border-color: #0d4178;")
         self.search_bar.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.search_bar.setFixedHeight(70)
+        self.search_bar.setPlaceholderText("Search Item")
         
 
-        self.search_button.setStyleSheet("font-size: 50px;"
-                                         "font-family: Arial;"
-                                         "background-color: white")
+        self.search_button.setStyleSheet(
+                                        """
+                                        QPushButton {
+                                        font-size: 50px;
+                                        background-color: #a5a6a8;
+                                        border-bottom: 3px solid #32353d;
+                                        border-top: 3px solid #32353d;
+                                        border-right: 3px solid #32353d;
+                                        font-weight: bold;
+                                        font-family: Comic Sans MS;
+                                        color: white;
+                                        }
+                                        QPushButton:hover {
+                                        background-color: #c5d7eb;
+                                        border-bottom: 3px solid white;
+                                        border-top: 3px solid white;
+                                        border-right: 3px solid white; 
+                                        color: #7d838a  
+                                        }
+                                        """
+                                        )
         self.search_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.search_button.setFixedWidth(200)
         self.search_button.setFixedHeight(70) 
@@ -113,29 +135,60 @@ class LookupWindow(QWidget):
 #----------------------------------------------------------------------------------------------------------------------------------------
 
         self.delete_bar.setStyleSheet("font-size: 55px;"
-                                      "font-family: Comic Sans MS;"
-                                      "background-color: white;")
+                                      "font-family: Arial;"
+                                      "background-color: white;"
+                                      "border-style: solid;"
+                                      "border-width: 2px;"
+                                      "border-color: #0d4178;")
         self.delete_bar.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.delete_bar.setFixedHeight(70)
+        self.delete_bar.setPlaceholderText("Enter Item or Barcode Number to Delete")
 
 
-        self.delete_button.setStyleSheet("font-size: 50px;"
-                                         "font-family: Arial;"
-                                         "background-color: white")
+        self.delete_button.setStyleSheet(
+                                        """
+                                        QPushButton {
+                                        font-size: 50px;
+                                        background-color: #940a0a;
+                                        border-bottom: 3px solid #32353d;
+                                        border-top: 3px solid #32353d;
+                                        border-right: 3px solid #32353d;
+                                        font-weight: bold;
+                                        font-family: Comic Sans MS;
+                                        color: white;
+                                        }
+                                        QPushButton:hover {
+                                        background-color: #ff0000;
+                                        border-bottom: 3px solid white;
+                                        border-top: 3px solid white;
+                                        border-right: 3px solid white; 
+                                        color: white  
+                                        }
+                                        """
+                                        )
         self.delete_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.delete_button.setFixedWidth(200)
         self.delete_button.setFixedHeight(70) 
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 
-        self.save_changes_button.setStyleSheet("font-size: 50px;"
-                                           "background-color: #1256b0;"
-                                           "border-style: solid;"
-                                           "border-color: black;"
-                                           "border-width: 5px;"
-                                           "font-weight: bold;"
-                                           "font-family: Comic Sans MS;"
-                                           "color: white")
+        self.save_changes_button.setStyleSheet("""
+                                      QPushButton{
+                                      font-size: 50px;
+                                      background-color: #1256b0;
+                                      border-style: solid;
+                                      border-color: black;
+                                      border-width: 5px;
+                                      font-weight: bold;
+                                      font-family: Comic Sans MS;
+                                      color: white;
+                                      }
+                                      QPushButton:hover {
+                                      color: #1256b0;
+                                      background-color: #e1ebf5;
+                                      border-color: white;
+                                      }
+                                    """)
         self.save_changes_button.setFixedHeight(140)  
         self.save_changes_button.setFixedWidth(350) 
         self.save_changes_button.clicked.connect(self.save_changes)
@@ -162,14 +215,18 @@ class LookupWindow(QWidget):
         search_layout.addWidget(self.search_bar)
         search_layout.addWidget(self.search_button)
         search_layout.setContentsMargins(20, 15, 20, 15)
+        search_layout.setSpacing(0)
 
         database_layout.addWidget(self.table)
         #database_layout.setAlignment(Qt.AlignCenter)
         delete_layout.addWidget(self.delete_bar)
         delete_layout.addWidget(self.delete_button)
+        delete_layout.setContentsMargins(20, 15, 20, 15)
+        delete_layout.setSpacing(0)
 
         changes_layout.addWidget(self.save_changes_button)
         changes_layout.addWidget(self.change_status_label)
+    
 
         main_layout.addLayout(title_layout)
         main_layout.addLayout(search_layout)
