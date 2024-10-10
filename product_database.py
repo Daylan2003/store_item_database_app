@@ -22,9 +22,10 @@ cursor = connect.cursor()
 
 #cursor.execute("""
 #	DROP TABLE IF EXISTS products;
-
-
 #	""")
+
+
+
 cursor.execute("""
     INSERT INTO products (item_name, item_price, item_quantity, barcode_number) VALUES 
 ('Bananas', 0.79, 50, 1000002),

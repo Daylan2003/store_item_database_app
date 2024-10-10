@@ -28,6 +28,7 @@ class LookupWindow(QWidget):
         self.database = self.create_connection()
         self.model = QSqlTableModel()
         self.model.setTable("products")
+        self.model.setEditStrategy(QSqlTableModel.OnManualSubmit) 
         self.model.select()
 
         self.initUI() 
@@ -120,6 +121,7 @@ class LookupWindow(QWidget):
         self.search_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.search_button.setFixedWidth(200)
         self.search_button.setFixedHeight(70) 
+        self.search_button.clicked.connect(self.search_item)
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -168,7 +170,8 @@ class LookupWindow(QWidget):
                                         )
         self.delete_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.delete_button.setFixedWidth(200)
-        self.delete_button.setFixedHeight(70) 
+        self.delete_button.setFixedHeight(70)
+        self.delete_button.clicked.connect(self.delete_item) 
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -257,5 +260,66 @@ class LookupWindow(QWidget):
             print("The database was unable to be opened")
         return database     
     
-    def save_changes():
-        pass
+    def save_changes(self):
+
+        for row in range(self.model.rowCount()):
+            index = self.model.index(row, self.model.fieldIndex('item_quantity'))
+            item_quantity_value = self.model.data(index)
+            if not isinstance(item_quantity_value, int):
+                self.save_fail()
+
+        if self.model.submitAll():
+            self.save_success()
+        else:
+            self.save_fail()    
+        
+    def save_success(self):
+        self.change_status_label.setText("Completion Status: Item edited Successfully")    
+        self.change_status_label.setStyleSheet("font-size: 75px;"
+                                                       "background-color: #079c05;"
+                                                       "border-style: solid;"
+                                                       "border-color: black;"
+                                                       "border-width: 5px;"
+                                                       "font-weight: bold;"
+                                                       "font-family: Comic Sans MS;"
+                                                       "color: white") 
+    
+
+    def save_fail(self):
+        self.change_status_label.setText("Completion Status: Error, Item entered incorrectly.") 
+        self.change_status_label.setStyleSheet("font-size: 75px;"
+                                                    "background-color: #f51d1d;"
+                                                    "border-style: solid;"
+                                                    "border-color: black;"
+                                                    "border-width: 5px;"
+                                                    "font-weight: bold;"
+                                                    "font-family: Comic Sans MS;"
+                                                    "color: white") 
+
+    def search_item(self):
+        search_query = self.search_bar.text().strip()
+
+        connect = sqlite3.connect('products.db')
+        cursor = connect.cursor()
+        cursor.execute('''f"item_name LIKE '%{search_query}%' OR barcode LIKE '%{search_query}%'"''')
+
+        
+      
+        print(search_query)
+
+        #self.model.setFilter(filter_condition)
+        self.model.select()
+        
+
+    def delete_item(self):
+        delete_query = self.delete_bar.text().strip()
+        print(delete_query)
+
+        connect = sqlite3.connect('products.db')
+        cursor = connect.cursor()
+        cursor.execute('''"DELETE FROM products WHERE item_name = ? OR barcode = ?", (delete_query, delete_query)''')  
+
+        connect.commit()
+        connect.close()
+
+        self.model.select()         

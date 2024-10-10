@@ -307,6 +307,16 @@ class AddWindow(QWidget):
             try:
                 connect = sqlite3.connect('products.db')
                 cursor = connect.cursor() 
+
+                cursor.execute ("""
+                    CREATE TABLE IF NOT EXISTS products (
+                    item_name TEXT NOT NULL,
+                    item_price REAL,
+                    item_quantity INTEGER,
+                    barcode_number INTEGER                                        
+                        )
+                                """)
+
                 cursor.execute("INSERT INTO products VALUES (?, ?, ?, ?)", (item_name, item_price, item_quantity, barcode_number))
  
                 connect.commit()
