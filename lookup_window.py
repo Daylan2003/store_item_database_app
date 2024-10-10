@@ -18,6 +18,8 @@ class LookupWindow(QWidget):
         self.search_bar = QLineEdit(self)
         self.search_button = QPushButton("Search", self)
         self.table = QTableView()
+        self.delete_bar = QLineEdit(self)
+        self.delete_button = QPushButton("Delete", self)
         self.save_changes_button = QPushButton("Save Changes", self)
         self.change_status_label = QLabel("Completition Status: ")
 
@@ -38,6 +40,7 @@ class LookupWindow(QWidget):
         search_layout = QHBoxLayout()
 
         database_layout = QHBoxLayout()
+        delete_layout = QHBoxLayout()
         changes_layout = QHBoxLayout()
 
         main_layout = QVBoxLayout()
@@ -80,22 +83,12 @@ class LookupWindow(QWidget):
         self.window_title_label.setAlignment(Qt.AlignCenter)
         self.window_title_label.setFixedHeight(140)
 
-        self.change_status_label.setStyleSheet("font-size: 75px;"
-                                           "background-color: #1256b0;"
-                                           "border-style: solid;"
-                                           "border-color: black;"
-                                           "border-width: 5px;"
-                                           "font-weight: bold;"
-                                           "font-family: Comic Sans MS;"
-                                           "color: white")
-        self.back_button.setFixedHeight(140)
 
-
-
+#----------------------------------------------------------------------------------------------------------------------------------------        
         self.search_bar.setStyleSheet("font-size: 55px;"
                                       "font-family: Comic Sans MS;"
                                       "background-color: white;")
-        self.search_button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.search_bar.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.search_bar.setFixedHeight(70)
         
 
@@ -107,14 +100,33 @@ class LookupWindow(QWidget):
         self.search_button.setFixedHeight(70) 
 
 
+#----------------------------------------------------------------------------------------------------------------------------------------
+
         self.table.setModel(self.model)
         self.table.setSelectionMode(QTableView.SingleSelection)
         self.table.setEditTriggers(QTableView.AllEditTriggers)
         self.table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+        self.table.setStyleSheet("background-color: white;"
+                                 "font-size: 20px;")
 
 
+#----------------------------------------------------------------------------------------------------------------------------------------
+
+        self.delete_bar.setStyleSheet("font-size: 55px;"
+                                      "font-family: Comic Sans MS;"
+                                      "background-color: white;")
+        self.delete_bar.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.delete_bar.setFixedHeight(70)
 
 
+        self.delete_button.setStyleSheet("font-size: 50px;"
+                                         "font-family: Arial;"
+                                         "background-color: white")
+        self.delete_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        self.delete_button.setFixedWidth(200)
+        self.delete_button.setFixedHeight(70) 
+
+#----------------------------------------------------------------------------------------------------------------------------------------
 
         self.save_changes_button.setStyleSheet("font-size: 50px;"
                                            "background-color: #1256b0;"
@@ -129,6 +141,18 @@ class LookupWindow(QWidget):
         self.save_changes_button.clicked.connect(self.save_changes)
 
 
+        self.change_status_label.setStyleSheet("font-size: 75px;"
+                                           "background-color: #1256b0;"
+                                           "border-style: solid;"
+                                           "border-color: black;"
+                                           "border-width: 5px;"
+                                           "font-weight: bold;"
+                                           "font-family: Comic Sans MS;"
+                                           "color: white")
+        self.change_status_label.setFixedHeight(140)
+
+#----------------------------------------------------------------------------------------------------------------------------------------
+
         title_layout.addWidget(self.back_button)
         title_layout.addWidget(self.window_title_label)
 
@@ -139,8 +163,10 @@ class LookupWindow(QWidget):
         search_layout.addWidget(self.search_button)
         search_layout.setContentsMargins(20, 15, 20, 15)
 
-        #database_layout.addWidget(self.table)
+        database_layout.addWidget(self.table)
         #database_layout.setAlignment(Qt.AlignCenter)
+        delete_layout.addWidget(self.delete_bar)
+        delete_layout.addWidget(self.delete_button)
 
         changes_layout.addWidget(self.save_changes_button)
         changes_layout.addWidget(self.change_status_label)
@@ -148,6 +174,7 @@ class LookupWindow(QWidget):
         main_layout.addLayout(title_layout)
         main_layout.addLayout(search_layout)
         main_layout.addLayout(database_layout)
+        main_layout.addLayout(delete_layout)
         main_layout.addLayout(changes_layout)
 
         main_layout.setContentsMargins(0, 0, 0, 10)
