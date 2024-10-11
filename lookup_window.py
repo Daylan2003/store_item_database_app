@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, QLineEdit, QSpacerItem, QTableView
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, QLineEdit, QSpacerItem, QTableView, QHeaderView
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 from main_window import MainWindow
@@ -21,7 +21,7 @@ class LookupWindow(QWidget):
         self.delete_bar = QLineEdit(self)
         self.delete_button = QPushButton("Delete", self)
         self.save_changes_button = QPushButton("Save Changes", self)
-        self.change_status_label = QLabel("Completition Status: ")
+        self.change_status_label = QLabel("Completion Status: ")
 
         self.main_window = None
 
@@ -130,8 +130,35 @@ class LookupWindow(QWidget):
         self.table.setSelectionMode(QTableView.SingleSelection)
         self.table.setEditTriggers(QTableView.AllEditTriggers)
         self.table.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        self.table.setStyleSheet("background-color: white;"
-                                 "font-size: 20px;")
+        self.table.setAlternatingRowColors(True)
+        self.table.horizontalHeader().setStretchLastSection(True)
+        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+        self.table.setStyleSheet("""
+            QTableView {
+                        background-color: #f0e7c7;
+                        font-size: 30px;
+                        border: 3px solid #0d4178;
+                        alternating-row-color: #bf9a15;
+                        font-family: Arial;                            
+                        }                            
+            QHeaderView::section {
+                        padding : 10px;
+                        font-size: 30px;
+                        font-weight: bold;
+                        background-color: #a2a4b0;                                     
+                        }
+            QTableCornerButton::section {
+                                 background-color: #2c2c30;
+                                 }                     
+
+
+                                    """
+            
+            
+            
+            
+          )
 
 
 #----------------------------------------------------------------------------------------------------------------------------------------
@@ -222,6 +249,8 @@ class LookupWindow(QWidget):
 
         database_layout.addWidget(self.table)
         #database_layout.setAlignment(Qt.AlignCenter)
+        database_layout.setContentsMargins(250, 10, 250, 10)
+
         delete_layout.addWidget(self.delete_bar)
         delete_layout.addWidget(self.delete_button)
         delete_layout.setContentsMargins(20, 15, 20, 15)
@@ -301,25 +330,30 @@ class LookupWindow(QWidget):
 
         connect = sqlite3.connect('products.db')
         cursor = connect.cursor()
-        cursor.execute('''f"item_name LIKE '%{search_query}%' OR barcode LIKE '%{search_query}%'"''')
 
-        
-      
-        print(search_query)
-
-        #self.model.setFilter(filter_condition)
+        filter_condition = f"item_name LIKE '{search_query}%' OR barcode_number LIKE '{search_query}'"
+    
+        self.model.setFilter(filter_condition)
+    
         self.model.select()
+ 
+        connect.commit()
+        connect.close()
+
+       
+
+    
         
 
     def delete_item(self):
         delete_query = self.delete_bar.text().strip()
-        print(delete_query)
 
         connect = sqlite3.connect('products.db')
         cursor = connect.cursor()
-        cursor.execute('''"DELETE FROM products WHERE item_name = ? OR barcode = ?", (delete_query, delete_query)''')  
+        cursor.execute("DELETE FROM products WHERE item_name = ? OR barcode_number = ?", (delete_query, delete_query))  
 
         connect.commit()
         connect.close()
+        self.delete_bar.clear()
 
         self.model.select()         
