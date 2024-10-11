@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, QLineEdit, QSpacerItem, QTableView, QHeaderView
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QWidget, QVBoxLayout, QHBoxLayout, QSizePolicy, QLineEdit, QSpacerItem, QTableView, QHeaderView, QStyledItemDelegate
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 from main_window import MainWindow
@@ -22,6 +22,8 @@ class LookupWindow(QWidget):
         self.delete_button = QPushButton("Delete", self)
         self.save_changes_button = QPushButton("Save Changes", self)
         self.change_status_label = QLabel("Status: ")
+
+        self.search_bar.textChanged.connect(self.search_item)
 
         self.main_window = None
 
@@ -155,7 +157,10 @@ class LookupWindow(QWidget):
                         }
             QTableCornerButton::section {
                                  background-color: #2c2c30;
-                                 }                     
+                                 }     
+            QTableView::item:hover {
+                                 background-color: #cc9d9b;
+                                 }                                     
 
 
                                     """
@@ -224,7 +229,7 @@ class LookupWindow(QWidget):
                                       border-color: white;
                                       }
                                     """)
-        self.save_changes_button.setFixedHeight(140)  
+        self.save_changes_button.setFixedHeight(100)  
         self.save_changes_button.setFixedWidth(350) 
         self.save_changes_button.clicked.connect(self.save_changes)
 
@@ -237,7 +242,7 @@ class LookupWindow(QWidget):
                                            "font-weight: bold;"
                                            "font-family: Comic Sans MS;"
                                            "color: white")
-        self.change_status_label.setFixedHeight(140)
+        self.change_status_label.setFixedHeight(100)
 
 #----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -363,4 +368,19 @@ class LookupWindow(QWidget):
         connect.close()
         self.delete_bar.clear()
 
-        self.model.select()         
+        self.model.select()    
+
+    def search_item(self):
+        search_query = self.search_bar.text().strip()
+
+        if search_query:
+            filter_condition = f"item_name LIKE '{search_query}%' OR barcode_number LIKE '{search_query}'"
+            self.model.setFilter(filter_condition)
+        else:
+            self.model.setFilter("")  
+    
+        self.model.select() 
+      
+
+
+      
