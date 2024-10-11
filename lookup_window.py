@@ -74,6 +74,9 @@ class LookupWindow(QWidget):
                                         border-left: 5px solid white; 
                                         color: #7d838a  
                                         }
+                                        QPushButton:pressed{
+                                           border-color: black;
+                                           }
                                         """
                                         )
         self.back_button.setFixedHeight(140)  
@@ -123,6 +126,9 @@ class LookupWindow(QWidget):
                                         border-right: 3px solid white; 
                                         color: #7d838a  
                                         }
+                                        QPushButton:pressed{
+                                           border-color: black;
+                                           }
                                         """
                                         )
         self.search_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
@@ -203,6 +209,9 @@ class LookupWindow(QWidget):
                                         border-right: 3px solid white; 
                                         color: white  
                                         }
+                                        QPushButton:pressed{
+                                           border-color: black;
+                                           }
                                         """
                                         )
         self.delete_button.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
@@ -228,6 +237,9 @@ class LookupWindow(QWidget):
                                       background-color: #e1ebf5;
                                       border-color: white;
                                       }
+                                               QPushButton:pressed{
+                                           border-color: black;
+                                           }
                                     """)
         self.save_changes_button.setFixedHeight(100)  
         self.save_changes_button.setFixedWidth(350) 
