@@ -21,7 +21,7 @@ class LookupWindow(QWidget):
         self.delete_bar = QLineEdit(self)
         self.delete_button = QPushButton("Delete", self)
         self.save_changes_button = QPushButton("Save Changes", self)
-        self.change_status_label = QLabel("Completion Status: ")
+        self.change_status_label = QLabel("Status: ")
 
         self.main_window = None
 
@@ -29,6 +29,11 @@ class LookupWindow(QWidget):
         self.model = QSqlTableModel()
         self.model.setTable("products")
         self.model.setEditStrategy(QSqlTableModel.OnManualSubmit) 
+        self.model.setHeaderData(0, Qt.Horizontal, "Item Name")
+        self.model.setHeaderData(1, Qt.Horizontal, "Item Price")
+        self.model.setHeaderData(2, Qt.Horizontal, "Item Quantity")
+        self.model.setHeaderData(3, Qt.Horizontal, "Barcode Number")
+
         self.model.select()
 
         self.initUI() 
@@ -140,7 +145,7 @@ class LookupWindow(QWidget):
                         font-size: 30px;
                         border: 3px solid #0d4178;
                         alternating-row-color: #bf9a15;
-                        font-family: Arial;                            
+                        font-family: Arial;                                    
                         }                            
             QHeaderView::section {
                         padding : 10px;
@@ -225,7 +230,7 @@ class LookupWindow(QWidget):
 
 
         self.change_status_label.setStyleSheet("font-size: 75px;"
-                                           "background-color: #1256b0;"
+                                           "background-color: #697480;"
                                            "border-style: solid;"
                                            "border-color: black;"
                                            "border-width: 5px;"
@@ -258,6 +263,7 @@ class LookupWindow(QWidget):
 
         changes_layout.addWidget(self.save_changes_button)
         changes_layout.addWidget(self.change_status_label)
+        changes_layout.setContentsMargins(20, 5, 20, 5)
     
 
         main_layout.addLayout(title_layout)
@@ -296,14 +302,16 @@ class LookupWindow(QWidget):
             item_quantity_value = self.model.data(index)
             if not isinstance(item_quantity_value, int):
                 self.save_fail()
+                self.change_status_label.setText("Status: Error, Items edited incorrectly.") 
 
         if self.model.submitAll():
             self.save_success()
+            self.change_status_label.setText("Status: Items edited Successfully")   
         else:
-            self.save_fail()    
+            self.save_fail()
+            self.change_status_label.setText("Status: Error, Items edited incorrectly.")     
         
-    def save_success(self):
-        self.change_status_label.setText("Completion Status: Item edited Successfully")    
+    def save_success(self):   
         self.change_status_label.setStyleSheet("font-size: 75px;"
                                                        "background-color: #079c05;"
                                                        "border-style: solid;"
@@ -315,7 +323,6 @@ class LookupWindow(QWidget):
     
 
     def save_fail(self):
-        self.change_status_label.setText("Completion Status: Error, Item entered incorrectly.") 
         self.change_status_label.setStyleSheet("font-size: 75px;"
                                                     "background-color: #f51d1d;"
                                                     "border-style: solid;"

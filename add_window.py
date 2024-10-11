@@ -200,7 +200,7 @@ class AddWindow(QWidget):
         self.add_button.setFixedHeight(140) 
 
         self.completion_status_label.setStyleSheet("font-size: 75px;"
-                                                   "background-color: #1256b0;"
+                                                   "background-color: #697480;"
                                                    "border: 5px solid black;"
                                                    "font-weight: bold;"
                                                    "font-family: Comic Sans MS;"
