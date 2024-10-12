@@ -8,7 +8,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("Item Database")
         self.setGeometry(0, 0, 1920, 1080)
-        self.setWindowIcon(QIcon("C:\\Users\\mahar\\Desktop\\price-tracker\\images\\Screenshot 2024-06-12 212403.png"))
+        self.setWindowIcon(QIcon("C:\\Users\\mahar\\Desktop\\price-tracker\\images\\cart.png"))
 
         self.title_label = QLabel("Store Item Database", self)
         self.add_item_button = QPushButton(self)
