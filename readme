@@ -1,0 +1,8 @@
+This is the readme page of how to use the application.
+
+It has 2 main features.
+1) The ability to add items to a database.
+2) The ability to lookup or edit items to said database.
+
+To create the database you must first add at least one item to it.
+After this everything should work as intended.

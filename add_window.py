@@ -281,12 +281,21 @@ class AddWindow(QWidget):
             except ValueError:
                 self.completition_error()
                 return
+            
+        barcode_number_input = self.item_barcode_number_line_edit.text()
+        if barcode_number_input.strip() == "":
+            barcode_number = 0
+        else:
+            try:
+                barcode_number = int(barcode_number_input)
+            except ValueError:
+                self.completition_error()
+                return    
 
           
 
         try:
             item_price = round(float(self.item_price_line_edit.text()),2)
-            barcode_number = int(self.item_barcode_number_line_edit.text())
         except ValueError:
             self.completition_error()
             return    
